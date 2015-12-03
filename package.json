@@ -1,0 +1,25 @@
+{
+  "name": "process-communication",
+  "version": "1.0.0",
+  "description": "Makes promise-based inter process communication easy",
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "apm test",
+    "compile": "ucompiler go src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steelbrain/process-communication.git"
+  },
+  "keywords": [
+    "process",
+    "communication",
+    "promise"
+  ],
+  "author": "steelbrain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/steelbrain/process-communication/issues"
+  },
+  "homepage": "https://github.com/steelbrain/process-communication#readme"
+}
