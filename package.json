@@ -21,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/steelbrain/process-communication/issues"
   },
-  "homepage": "https://github.com/steelbrain/process-communication#readme"
+  "homepage": "https://github.com/steelbrain/process-communication#readme",
+  "dependencies": {
+    "sb-communication": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-steelbrain": "^1.0.0",
+    "babel-preset-steelbrain-legacy": "^1.0.0"
+  }
 }
