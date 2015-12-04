@@ -4,11 +4,11 @@ import Cluster from 'cluster'
 import ChildProcess from 'child_process'
 import {Communication} from './communication'
 
-export function current() {
+export function create() {
   return new Communication(process)
 }
 
-export function process(process) {
+export function createFromProcess(process) {
   return new Communication(process)
 }
 
