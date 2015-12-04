@@ -16,8 +16,8 @@ export function fork(env) {
   return new Communication(Cluster.fork(env || process.env))
 }
 
-export function forkFile(filePath) {
-  return new Communication(ChildProcess.fork(filePath))
+export function forkFile(filePath, args = [], options = {}) {
+  return new Communication(ChildProcess.fork(filePath, args, options))
 }
 
 export {Communication}
