@@ -37,6 +37,7 @@ class ProcessCommunication {
 
   kill(sig) {
     this.process.kill(sig)
+    this.dispose()
   }
   dispose() {
     this.subscriptions.dispose()
