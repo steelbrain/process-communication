@@ -20,7 +20,7 @@ class ProcessCommunication {
     const callback = message => {
       this.communication.parseMessage(message)
     }
-    this.process.addEventListener('message', callback)
+    this.process.addListener('message', callback)
     this.subscriptions.add({
       dispose: function() {
         process.removeListener('message', callback)
