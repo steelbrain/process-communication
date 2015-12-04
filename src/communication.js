@@ -35,15 +35,11 @@ class ProcessCommunication {
     return this.communication.onRequest(name, callback)
   }
 
-  kill() {
-    this.process.kill()
-  }
-  disconnect() {
-    this.process.disconnect()
+  kill(sig) {
+    this.process.kill(sig)
   }
   dispose() {
-    this.communication.dispose()
-    this.kill()
+    this.subscriptions.dispose()
   }
 }
 
