@@ -42,9 +42,9 @@ communication.request('random', {max: 5}).then(function(response){
 })
 
 // Worker.js
-import {current} from 'process-communication'
+import {create} from 'process-communication'
 
-const communication = current()
+const communication = create()
 
 communication.onRequest('random', function(data, message) {
   message.response = Math.random() * data.max
