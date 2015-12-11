@@ -1,6 +1,6 @@
 {
   "name": "process-communication",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Makes promise-based inter process communication easy",
   "main": "lib/main.js",
   "jsnext:main": "src/main.js",

@@ -1,7 +1,7 @@
 'use babel'
 
 import Communication from 'sb-communication'
-import {CompositeDisposable} from 'sb-event-kit'
+import {CompositeDisposable, Emitter, Disposable} from 'sb-event-kit'
 
 class ProcessCommunication {
   constructor(process, debug) {
@@ -11,21 +11,29 @@ class ProcessCommunication {
 
     this.process = process
     this.communication = new Communication(debug)
-    this.subscriptions = new CompositeDisposable(this.communication)
+    this.emitter = new Emitter()
+    this.subscriptions = new CompositeDisposable(this.communication, this.emitter)
 
     this.communication.onShouldSend(data => {
       this.process.send(data)
     })
 
-    const callback = message => {
+    const messageCallback = message => {
       this.communication.parseMessage(message)
     }
-    this.process.addListener('message', callback)
-    this.subscriptions.add({
-      dispose: function() {
-        process.removeListener('message', callback)
-      }
-    })
+    this.process.addListener('message', messageCallback)
+    this.subscriptions.add(new Disposable(function() {
+      process.removeListener('message', messageCallback)
+    }))
+
+    const exitCallback = () => {
+      this.emitter.emit('did-exit')
+      this.dispose()
+    }
+    this.process.addListener('exit', exitCallback)
+    this.subscriptions.add(new Disposable(function() {
+      process.removeListener('exit', exitCallback)
+    }))
   }
   request(name, data = {}) {
     return this.communication.request(name, data)
@@ -34,10 +42,14 @@ class ProcessCommunication {
   onRequest(name, callback) {
     return this.communication.onRequest(name, callback)
   }
+  onDidExit(callback) {
+    return this.emitter.on('did-exit', callback)
+  }
 
   kill(sig) {
-    this.process.kill(sig)
+    this.emitter.emit('did-exit')
     this.dispose()
+    this.process.kill(sig)
   }
   dispose() {
     this.subscriptions.dispose()

@@ -11,14 +11,20 @@ describe('Process-Communication', function() {
     it('works as expected', function() {
       const child = fork(WORKER_PATH)
       const communication = Communication.createFromProcess(child)
+      let exitTriggered = 0
 
       waitsForPromise(function() {
+        communication.onDidExit(function() {
+          ++exitTriggered
+        })
         return communication.request('ping', 'ping').then(function(response) {
           expect(response).toBe('pong')
           return communication.request('ping', 'ping')
         }).then(function(response) {
           expect(response).toBe('pong')
           communication.kill()
+        }).then(function() {
+          expect(exitTriggered).toBe(1)
         })
       })
     })
