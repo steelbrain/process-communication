@@ -1,7 +1,7 @@
 'use babel'
 
 import Communication from 'sb-communication'
-import {CompositeDisposable, Disposable} from 'sb-event-kit'
+import {CompositeDisposable, Emitter, Disposable} from 'sb-event-kit'
 
 class ProcessCommunication {
   constructor(process, debug) {
@@ -11,7 +11,8 @@ class ProcessCommunication {
 
     this.process = process
     this.communication = new Communication(debug)
-    this.subscriptions = new CompositeDisposable(this.communication)
+    this.emitter = new Emitter()
+    this.subscriptions = new CompositeDisposable(this.communication, this.emitter)
 
     this.communication.onShouldSend(data => {
       this.process.send(data)
@@ -32,9 +33,13 @@ class ProcessCommunication {
   onRequest(name, callback) {
     return this.communication.onRequest(name, callback)
   }
+  onDidDie(callback) {
+    return this.emitter.on('did-die', callback)
+  }
 
   kill(sig) {
     this.process.kill(sig)
+    this.emitter.emit('did-die', callback)
     this.dispose()
   }
   dispose() {
