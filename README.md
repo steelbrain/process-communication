@@ -9,7 +9,8 @@ Process-Communication is a lightweight module that makes inter-process communica
 export class Communication {
   constructor(process: Object, debug: Boolean)
   request(type: String, data: Object): Promise
-  onRequest(type: String, callback: Function)
+  onRequest(type: String, callback: Function): Disposable
+  onDidExit(callback): Disposable
   kill(signal) // <-- also disposes
   dispose()
 }
