@@ -30,7 +30,7 @@ class ProcessCommunication {
       this.emitter.emit('did-exit')
       this.dispose()
     }
-    this.process.addEventListener('exit', exitCallback)
+    this.process.addListener('exit', exitCallback)
     this.subscriptions.add(new Disposable(function() {
       process.removeListener('exit', exitCallback)
     }))
@@ -47,7 +47,7 @@ class ProcessCommunication {
   }
 
   kill(sig) {
-    this.emitter.emit('did-exit', callback)
+    this.emitter.emit('did-exit')
     this.dispose()
     this.process.kill(sig)
   }
