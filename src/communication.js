@@ -1,7 +1,7 @@
 'use babel'
 
 import Communication from 'sb-communication'
-import {CompositeDisposable} from 'sb-event-kit'
+import {CompositeDisposable, Disposable} from 'sb-event-kit'
 
 class ProcessCommunication {
   constructor(process, debug) {
@@ -21,11 +21,9 @@ class ProcessCommunication {
       this.communication.parseMessage(message)
     }
     this.process.addListener('message', callback)
-    this.subscriptions.add({
-      dispose: function() {
-        process.removeListener('message', callback)
-      }
-    })
+    this.subscriptions.add(new Disposable(function() {
+      process.removeListener('message', callback)
+    }))
   }
   request(name, data = {}) {
     return this.communication.request(name, data)
