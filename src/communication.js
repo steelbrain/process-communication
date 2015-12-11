@@ -27,7 +27,7 @@ class ProcessCommunication {
     }))
 
     const exitCallback = () => {
-      this.emitter.emit('did-die')
+      this.emitter.emit('did-exit')
       this.dispose()
     }
     this.process.addEventListener('exit', exitCallback)
@@ -42,14 +42,14 @@ class ProcessCommunication {
   onRequest(name, callback) {
     return this.communication.onRequest(name, callback)
   }
-  onDidDie(callback) {
-    return this.emitter.on('did-die', callback)
+  onDidExit(callback) {
+    return this.emitter.on('did-exit', callback)
   }
 
   kill(sig) {
-    this.process.kill(sig)
-    this.emitter.emit('did-die', callback)
+    this.emitter.emit('did-exit', callback)
     this.dispose()
+    this.process.kill(sig)
   }
   dispose() {
     this.subscriptions.dispose()
