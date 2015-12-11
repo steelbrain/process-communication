@@ -18,12 +18,21 @@ class ProcessCommunication {
       this.process.send(data)
     })
 
-    const callback = message => {
+    const messageCallback = message => {
       this.communication.parseMessage(message)
     }
-    this.process.addListener('message', callback)
+    this.process.addListener('message', messageCallback)
     this.subscriptions.add(new Disposable(function() {
-      process.removeListener('message', callback)
+      process.removeListener('message', messageCallback)
+    }))
+
+    const exitCallback = () => {
+      this.emitter.emit('did-die')
+      this.dispose()
+    }
+    this.process.addEventListener('exit', exitCallback)
+    this.subscriptions.add(new Disposable(function() {
+      process.removeListener('exit', exitCallback)
     }))
   }
   request(name, data = {}) {
