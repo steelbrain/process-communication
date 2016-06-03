@@ -3,7 +3,6 @@
   "version": "1.1.0",
   "description": "Makes promise-based inter process communication easy",
   "main": "lib/main.js",
-  "jsnext:main": "src/main.js",
   "scripts": {
     "test": "apm test",
     "compile": "ucompiler go src"
@@ -28,7 +27,7 @@
     "sb-event-kit": "^1.0.2"
   },
   "devDependencies": {
-    "babel-preset-steelbrain": "^1.0.0",
-    "babel-preset-steelbrain-legacy": "^1.0.0"
+    "babel-preset-steelbrain": "^2.0.1",
+    "ucompiler": "^3.2.0"
   }
 }
