@@ -5,7 +5,7 @@
   "main": "lib/main.js",
   "scripts": {
     "test": "apm test",
-    "compile": "ucompiler go src"
+    "compile": "ucompiler go"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "babel-preset-steelbrain": "^2.0.1",
-    "ucompiler": "^3.2.0"
+    "ucompiler": "^3.2.0",
+    "ucompiler-plugin-babel": "^3.1.1"
   }
 }
