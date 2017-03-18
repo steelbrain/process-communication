@@ -1,6 +1,8 @@
 Process-Communication
 ====================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/steelbrain/process-communication.svg)](https://greenkeeper.io/)
+
 Process-Communication is a lightweight module that makes inter-process communication a piece of cake! It's very easy to get started with it
 
 #### API
