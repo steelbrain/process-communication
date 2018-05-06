@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/steelbrain/process-communication#readme",
   "dependencies": {
-    "sb-communication": "^4.0.1",
+    "sb-communication": "^5.0.0",
     "sb-event-kit": "^3.0.0"
   },
   "devDependencies": {
